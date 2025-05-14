@@ -3,10 +3,9 @@
 In main.js you can see how to initialize the widget and how to handle the responses.
 To test, edit main.js and replace the following lines with your own values.
 
-```javascript  
-const apiKey = '{your-api-key}';
-const userId = '{your-user-id}';
-const vendorId = '{your-vendor-id}';
+```javascript
+const apiKey = "{your-api-key}";
+const userId = "{your-user-id}";
 ```
 
 apiKey and vendorId are supplied by GrailPay.
