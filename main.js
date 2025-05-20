@@ -3,32 +3,28 @@
 // Update the following variables with your own values
 const apiKey = ''; //Add Api Key here
 const userId = ''; // Add your user ID here
-const vendorId = ''; // Add your vendor ID here
 
 document.addEventListener('DOMContentLoaded', function () {
     const payButton = document.getElementById('pay-button');
 
     if (payButton) {
         payButton.disabled = true;
-
         window.grailpay.init({
-            containerId: 'widget-container',
-            vendorId: vendorId,
+            containerId: 'widget-container',            
             userId: userId,
             token: apiKey,
+            sandbox: false, // Set to true to enable sandbox (test) mode; false for production
             onError: function (error) {
                 console.log('GrailPay.onError', error);
             },
-            onClose: function (data) {
-                console.log('GrailPay.onClose', data);
+            onLinkedDefaultAccount: function (data) {
                 let responseContainer = document.getElementById('response-container');
-
                 if (responseContainer) {
-                    responseContainer.innerHTML = data?.accountId ? `AccountId: ${data.accountId}` : '';
+                    responseContainer.innerHTML = data?.account_id ? `AccountId: ${data.account_id}` : '';
                 }
             }
         }).then(function (res) {
-            if (res.status === 200) {
+            if (res.status) {
                 payButton.disabled = false;
                 console.log('GrailPay Banklink Widget initialized successfully');
             }
